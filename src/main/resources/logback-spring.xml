@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <appender name="count" class="com.tutorial.whatstatic.config.CountAppender"/>
+
+    <appender name="jsonAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <version>1</version>
+            <shortenedLoggerNameLength>0</shortenedLoggerNameLength>
+            <includeCallerData>true</includeCallerData>
+            <provider class="com.tutorial.whatstatic.config.JsonProvider"/>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="count"/>
+        <appender-ref ref="jsonAppender"/>
+    </root>
+
+    <logger name="org.springframework.web" level="DEBUG"/>
+
+</configuration>
